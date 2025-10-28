@@ -57,6 +57,32 @@ router.post('/all', async (req, res) => {
   }
 })
 
+
+router.put('/:id', async (req, res) => {
+
+  try{
+   const updateTodo =  await Crud.findByIdAndUpdate(
+     req.params.id,
+     {$set: req.body},
+     {new: true, runValidators: true}
+     )
+    res.json({
+      message: 'todo update',
+      result:  updateTodo
+    })
+  }
+  catch(error){
+    console.error(error)
+  }
+})
+
+
+
+
+
+
+
+
 router.delete('/:id', async (req, res) => {
   try{
     const data = await Crud.findByIdAndDelete(req.params.id)
